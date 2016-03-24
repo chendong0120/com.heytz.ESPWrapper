@@ -1,0 +1,10 @@
+{
+  "version": "0.0.1",
+  "name": "com.heytz.ESPWrapper",
+  "cordova_name": "ESPWrapper",
+  "platforms": [
+    "ios",
+    "android"
+  ],
+  "engines": []
+}
