@@ -42,6 +42,7 @@
         <source-file src="src/ios/ESPUDPSocketClient.m"/>
         <source-file src="src/ios/ESPUDPSocketServer.m"/>
         <source-file src="src/ios/ESPUDPSocketServer.h"/>
+        <source-file src="src/ios/ESPViewController.h"/>
         <source-file src="src/ios/IPAddress.c"/>
         <source-file src="src/ios/IPAddress.h"/>
         <source-file src="src/ios/ESPWrapper.m"/>
