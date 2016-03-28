@@ -29,7 +29,6 @@
         <source-file src="src/ios/ESPDatumCode.h"/>
         <source-file src="src/ios/ESPGuideCode.h"/>
         <source-file src="src/ios/ESPGuideCode.m"/>
-        <source-file src="src/ios/ESPTouchDelegate.m"/>
         <source-file src="src/ios/ESPTouchDelegate.h"/>
         <source-file src="src/ios/ESPTouchGenerator.h"/>
         <source-file src="src/ios/ESPTouchGenerator.m"/>
