@@ -1,11 +1,11 @@
-package com.espressif.iot.esptouch.util;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+package com.heytz.ESPWrapper.esptouch.util;
 
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class EspNetUtil {
 

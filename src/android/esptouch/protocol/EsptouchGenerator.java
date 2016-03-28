@@ -1,9 +1,9 @@
-package com.espressif.iot.esptouch.protocol;
+package com.heytz.ESPWrapper.esptouch.protocol;
+
+import com.heytz.ESPWrapper.esptouch.task.IEsptouchGenerator;
+import com.heytz.ESPWrapper.esptouch.util.ByteUtil;
 
 import java.net.InetAddress;
-
-import com.espressif.iot.esptouch.task.IEsptouchGenerator;
-import com.espressif.iot.esptouch.util.ByteUtil;
 
 public class EsptouchGenerator implements IEsptouchGenerator {
 

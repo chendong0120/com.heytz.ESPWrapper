@@ -1,4 +1,4 @@
-package com.espressif.iot.esptouch.util;
+package com.heytz.ESPWrapper.esptouch.util;
 
 import java.util.zip.Checksum;
 

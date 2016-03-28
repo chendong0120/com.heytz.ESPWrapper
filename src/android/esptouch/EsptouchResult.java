@@ -1,4 +1,4 @@
-package com.espressif.iot.esptouch;
+package com.heytz.ESPWrapper.esptouch;
 
 import java.net.InetAddress;
 import java.util.concurrent.atomic.AtomicBoolean;

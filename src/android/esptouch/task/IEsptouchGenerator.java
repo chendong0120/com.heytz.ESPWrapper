@@ -1,4 +1,4 @@
-package com.espressif.iot.esptouch.task;
+package com.heytz.ESPWrapper.esptouch.task;
 
 public interface IEsptouchGenerator {
 	/**

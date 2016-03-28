@@ -15,10 +15,38 @@
         <framework src="SystemConfiguration.framework"/>
         <framework src="CFNetwork.framework"/>
 
-        <source-file src="src/ios/HiJoine.h"/>
+        <source-file src="src/ios/ESP_ByteUtil.h"/>
+        <source-file src="src/ios/ESP_ByteUtil.m"/>
+        <source-file src="src/ios/ESP_CRC8.m"/>
+        <source-file src="src/ios/ESP_CRC8.h"/>
+        <source-file src="src/ios/ESP_NetUtil.h"/>
+        <source-file src="src/ios/ESP_NetUtil.m"/>
+        <source-file src="src/ios/ESPAppDelegate.m"/>
+        <source-file src="src/ios/ESPAppDelegate.h"/>
+        <source-file src="src/ios/ESPDataCode.h"/>
+        <source-file src="src/ios/ESPDataCode.m"/>
+        <source-file src="src/ios/ESPDatumCode.m"/>
+        <source-file src="src/ios/ESPDatumCode.h"/>
+        <source-file src="src/ios/ESPGuideCode.h"/>
+        <source-file src="src/ios/ESPGuideCode.m"/>
+        <source-file src="src/ios/ESPTouchDelegate.m"/>
+        <source-file src="src/ios/ESPTouchDelegate.h"/>
+        <source-file src="src/ios/ESPTouchGenerator.h"/>
+        <source-file src="src/ios/ESPTouchGenerator.m"/>
+        <source-file src="src/ios/ESPTouchResult.m"/>
+        <source-file src="src/ios/ESPTouchResult.h"/>
+        <source-file src="src/ios/ESPTouchTask.h"/>
+        <source-file src="src/ios/ESPTouchTask.m"/>
+        <source-file src="src/ios/ESPTouchTaskParameter.m"/>
+        <source-file src="src/ios/ESPTouchTaskParameter.h"/>
+        <source-file src="src/ios/ESPUDPSocketClient.h"/>
+        <source-file src="src/ios/ESPUDPSocketClient.m"/>
+        <source-file src="src/ios/ESPUDPSocketServer.m"/>
+        <source-file src="src/ios/ESPUDPSocketServer.h"/>
+        <source-file src="src/ios/IPAddress.c"/>
+        <source-file src="src/ios/IPAddress.h"/>
         <source-file src="src/ios/ESPWrapper.m"/>
-        <source-file framework="true" src="libHIQJOine.a"/>
-        <framework src="libHIQJOine.a"/>
+
 
     </platform>
     <platform name="android">
