@@ -48,11 +48,10 @@
 
     wifiSSID = [command.arguments objectAtIndex:0];
     wifiKey = [command.arguments objectAtIndex:1];
-//    loginID = [command.arguments objectAtIndex:2];
-//    deviceLoginId = [command.arguments objectAtIndex:6];
-//    devicePass = [command.arguments objectAtIndex:7];
-//    int easylinkVersion;
-//    activatePort = [command.arguments objectAtIndex:5];
+    uid = [command.arguments objectAtIndex:2];
+    APPId = [command.arguments objectAtIndex:3];
+    productKey = [command.arguments objectAtIndex:4];
+    token = [command.arguments objectAtIndex:5];
     commandHolder = command;
 //
 //    if ([command.arguments objectAtIndex:3] == nil || [command.arguments objectAtIndex:4] == nil) {
@@ -92,10 +91,13 @@
 -(void) onEsptouchResultAddedWithResult: (ESPTouchResult *) result
 {
     NSLog(@"EspTouchDelegateImpl onEsptouchResultAddedWithResult bssid: %@", result.bssid);
+    deviceIp=[ESP_NetUtil descriptionInetAddrByData:result.ipAddrData];
+
     dispatch_async(dispatch_get_main_queue(), ^{
        
     });
     @try {
+       
         if (deviceIp!=nil) {
             [self.commandDelegate runInBackground:^{
                 requestUrl =[[NSString alloc] init];
@@ -146,7 +148,8 @@
                 
             }];
         } else {
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+            CDVPluginResult *
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:commandHolder.callbackId];
         }
     }
