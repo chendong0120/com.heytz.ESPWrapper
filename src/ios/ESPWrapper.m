@@ -109,7 +109,7 @@
                 
                 para=[[[[[[[[@"{\"app_id\":\"" stringByAppendingString:APPId] stringByAppendingString:@"\",\"product_key\":\""]stringByAppendingString:productKey]stringByAppendingString:@"\",\"user_token\":\""]stringByAppendingString:token] stringByAppendingString:@"\",\"uid\":\""]stringByAppendingString:uid]stringByAppendingString:@"\"}"];
                 
-                sleep(1);
+                sleep(5);
                 
                 NSDictionary *ret;
                 int resultFlag=0;
