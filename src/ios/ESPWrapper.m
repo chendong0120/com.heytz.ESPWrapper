@@ -195,9 +195,11 @@ NSString* devicePass;
 
 - (ESPTouchResult *) executeForResult
 {
-//    NSString *apBssid =self.bssid;
+    NSDictionary *ssidInfo = [self fetchNetInfo];
+    NSString *apBssid =[ssidInfo objectForKey:@"BSSID"];
+    NSLog(@"bssid: %@", apBssid);
     _esptouchTask =
-    [[ESPTouchTask alloc]initWithApSsid:wifiSSID andApBssid:@"d8:24:bd:76:b9:b4" andApPwd:wifiKey andIsSsidHiden:false];
+    [[ESPTouchTask alloc]initWithApSsid:wifiSSID andApBssid:apBssid andApPwd:wifiKey andIsSsidHiden:false];
     // set delegate
     [_esptouchTask setEsptouchDelegate:_esptouchDelegate];
     ESPTouchResult * esptouchResult = [_esptouchTask executeForResult];
@@ -219,6 +221,25 @@ NSString* devicePass;
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"OK"];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:commandHolder.callbackId];
     
+}
+
+- (NSDictionary *)fetchNetInfo
+{
+    NSArray *interfaceNames = CFBridgingRelease(CNCopySupportedInterfaces());
+    //    NSLog(@"%s: Supported interfaces: %@", __func__, interfaceNames);
+    
+    NSDictionary *SSIDInfo;
+    for (NSString *interfaceName in interfaceNames) {
+        SSIDInfo = CFBridgingRelease(
+                                     CNCopyCurrentNetworkInfo((__bridge CFStringRef)interfaceName));
+        //        NSLog(@"%s: %@ => %@", __func__, interfaceName, SSIDInfo);
+        
+        BOOL isNotEmpty = (SSIDInfo.count > 0);
+        if (isNotEmpty) {
+            break;
+        }
+    }
+    return SSIDInfo;
 }
 
 - (void)dealloc:(CDVInvokedUrlCommand*)command
