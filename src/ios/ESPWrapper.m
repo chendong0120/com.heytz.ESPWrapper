@@ -6,6 +6,7 @@
 #import "ESPTouchDelegate.h"
 #import "AFNetworking.h"
 #import "FastSocket.h"
+#import <SystemConfiguration/CaptiveNetwork.h>
 
 @interface EspTouchDelegateImpl : NSObject<ESPTouchDelegate>
 
