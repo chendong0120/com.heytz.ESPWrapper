@@ -7,6 +7,52 @@
 #import "AFNetworking.h"
 #import "FastSocket.h"
 
+@interface EspTouchDelegateImpl : NSObject<ESPTouchDelegate>
+
+@end
+
+@implementation EspTouchDelegateImpl
+NSString *loginID;
+CDVInvokedUrlCommand * commandHolder;
+NSString *deviceIp ;
+NSString *uid;
+NSString *userToken ;
+NSString *APPId ;
+NSString *productKey ;
+NSString *token ;
+int acitvateTimeout;
+NSString* wifiSSID;
+NSString* wifiKey;
+NSString* activatePort;
+NSString* bssid;
+NSString *para;
+NSString * requestUrl;
+
+NSString* deviceLoginId;
+NSString* devicePass;
+
+-(void) dismissAlert:(UIAlertView *)alertView
+{
+    [alertView dismissWithClickedButtonIndex:[alertView cancelButtonIndex] animated:YES];
+}
+
+-(void) showAlertWithResult: (ESPTouchResult *) result
+{
+    NSString *title = nil;
+    NSString *message = [NSString stringWithFormat:@"%@ is connected to the wifi" , result.bssid];
+    NSTimeInterval dismissSeconds = 3.5;
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:title message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+    [alertView show];
+    [self performSelector:@selector(dismissAlert:) withObject:alertView afterDelay:dismissSeconds];
+}
+
+-(void) onEsptouchResultAddedWithResult: (ESPTouchResult *) result
+{
+   
+
+}
+@end
+
 @interface ESPWrapper : CDVPlugin <ESPTouchDelegate> {
     // Member variables go here.
 
@@ -30,7 +76,7 @@
     NSString* deviceLoginId;
     NSString* devicePass;
     ESPTouchTask *_esptouchTask;
-//    EspTouchDelegateImpl *_esptouchDelegate;
+    EspTouchDelegateImpl *_esptouchDelegate;
 }
 - (void)setDeviceWifi:(CDVInvokedUrlCommand*)command;
 - (void)sendDidVerification:(CDVInvokedUrlCommand*)command;
@@ -40,7 +86,7 @@
 @implementation ESPWrapper
 
 -(void)pluginInitialize{
-
+    
 }
 
 - (void)setDeviceWifi:(CDVInvokedUrlCommand*)command
@@ -72,34 +118,19 @@
     }
     // execute the task
 //    NSArray *esptouchResultArray = [self executeForResults];
-    ESPTouchResult *esptouchResult = [self executeForResult];
     
-}
-
-- (ESPTouchResult *) executeForResult
-{
-//    NSString *apBssid =self.bssid;
-    _esptouchTask =
-    [[ESPTouchTask alloc]initWithApSsid:wifiSSID andApBssid:@"d8:24:bd:76:b9:b4" andApPwd:wifiKey andIsSsidHiden:false];
-    // set delegate
-    [_esptouchTask setEsptouchDelegate:self];
-    ESPTouchResult * esptouchResult = [_esptouchTask executeForResult];
-    NSLog(@"ESPViewController executeForResult() result is: %@",esptouchResult);
-    return esptouchResult;
-}
-
--(void) onEsptouchResultAddedWithResult: (ESPTouchResult *) result
-{
-    NSLog(@"EspTouchDelegateImpl onEsptouchResultAddedWithResult bssid: %@", result.bssid);
-    deviceIp=[ESP_NetUtil descriptionInetAddrByData:result.ipAddrData];
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-       
-    });
-    @try {
-       
-        if (deviceIp!=nil) {
-            [self.commandDelegate runInBackground:^{
+    [self.commandDelegate runInBackground:^{
+        _esptouchDelegate = [[EspTouchDelegateImpl alloc]init];
+        ESPTouchResult *esptouchResult = [self executeForResult];
+        NSLog(@"EspTouchDelegateImpl onEsptouchResultAddedWithResult bssid: %@", esptouchResult.bssid);
+        deviceIp=[ESP_NetUtil descriptionInetAddrByData:esptouchResult.ipAddrData];
+        //
+        //    dispatch_async(dispatch_get_main_queue(), ^{
+        //
+        //    });
+        @try {
+            
+            if (deviceIp!=nil) {
                 requestUrl =[[NSString alloc] init];
                 //                requestUrl = [[[[[requestUrl stringByAppendingString:@"http://"] stringByAppendingString:deviceIp]
                 //                                stringByAppendingString:@":"]
@@ -145,21 +176,38 @@
                     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
                     [self.commandDelegate sendPluginResult:pluginResult callbackId:commandHolder.callbackId];
                 }
-                
-            }];
-        } else {
-            CDVPluginResult *
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+            } else {
+                CDVPluginResult *
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+                [self.commandDelegate sendPluginResult:pluginResult callbackId:commandHolder.callbackId];
+            }
+        }
+        @catch (NSException *exception) {
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
             [self.commandDelegate sendPluginResult:pluginResult callbackId:commandHolder.callbackId];
         }
-    }
-    @catch (NSException *exception) {
-        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:commandHolder.callbackId];
-    }
-    @finally {
-        //
-    }
+        @finally {
+            //
+        }
+    }];
+    
+}
+
+- (ESPTouchResult *) executeForResult
+{
+//    NSString *apBssid =self.bssid;
+    _esptouchTask =
+    [[ESPTouchTask alloc]initWithApSsid:wifiSSID andApBssid:@"d8:24:bd:76:b9:b4" andApPwd:wifiKey andIsSsidHiden:false];
+    // set delegate
+    [_esptouchTask setEsptouchDelegate:_esptouchDelegate];
+    ESPTouchResult * esptouchResult = [_esptouchTask executeForResult];
+    NSLog(@"ESPViewController executeForResult() result is: %@",esptouchResult);
+    return esptouchResult;
+}
+
+-(void) onEsptouchResultAddedWithResult: (ESPTouchResult *) result
+{
+    
 }
 - (void)sendDidVerification:(CDVInvokedUrlCommand*)command
 {
@@ -167,7 +215,7 @@
     commandHolder = command;
     NSString *para=[[@"{\"device_id\":\"" stringByAppendingString:did]stringByAppendingString:@"\"}"];
     NSData *data = [para dataUsingEncoding:NSUTF8StringEncoding];
-   // long count = [socket sendBytes:[data bytes] count:[data length]];
+    long count = [socket sendBytes:[data bytes] count:[data length]];
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"OK"];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:commandHolder.callbackId];
     
