@@ -6,7 +6,6 @@
 #import "ESPTouchDelegate.h"
 #import "AFNetworking.h"
 #import "FastSocket.h"
-#import <SystemConfiguration/CaptiveNetwork.h>
 
 @interface EspTouchDelegateImpl : NSObject<ESPTouchDelegate>
 
@@ -153,9 +152,9 @@ NSString* devicePass;
                 NSData *data = [para dataUsingEncoding:NSUTF8StringEncoding];
                 long count = [socket sendBytes:[data bytes] count:[data length]];
                 
-                char bytes[54];
-                [socket receiveBytes:bytes count:54];
-                NSString *received = [[NSString alloc] initWithBytes:bytes length:54 encoding:NSUTF8StringEncoding];
+                char bytes[59];
+                [socket receiveBytes:bytes count:59];
+                NSString *received = [[NSString alloc] initWithBytes:bytes length:59 encoding:NSUTF8StringEncoding];
                 
                 NSData *jsonData = [received dataUsingEncoding:NSUTF8StringEncoding];
                 NSError *err;
