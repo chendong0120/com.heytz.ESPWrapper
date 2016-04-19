@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import <SystemConfiguration/CaptiveNetwork.h>
 #import <Cordova/CDV.h>
 #import "ESPTouchTask.h"
 #import "ESPTouchResult.h"
