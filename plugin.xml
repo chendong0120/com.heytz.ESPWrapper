@@ -55,7 +55,12 @@
                 <param name="android-package" value="com.heytz.ESPWrapper.ESPWrapper"/>
             </feature>
         </config-file>
-        <config-file parent="/*" target="AndroidManifest.xml"/>
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+        </config-file>
         <source-file src="src/android/ESPWrapper.java" target-dir="src/com/heytz/ESPWrapper"/>
         <source-file src="src/android/EspWifiAdminSimple.java" target-dir="src/com/heytz/ESPWrapper"/>
         <source-file src="libs/dd-plist.jar" target-dir="libs"/>
