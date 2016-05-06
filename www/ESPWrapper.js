@@ -2,10 +2,10 @@ var exec = require('cordova/exec');
 
 exports.setDeviceWifi = function (wifiSSID,
                                   wifiKey,
-                                  username,
-                                  easylinkVersion,
-                                  activateTimeout,
-                                  activatePort,
+                                  uid,
+                                  appid,
+                                  productKey,
+                                  token,
                                   moduleDefaultUser,
                                   moduleDefaultPass,
                                   success, error) {
@@ -13,10 +13,10 @@ exports.setDeviceWifi = function (wifiSSID,
         [
             wifiSSID,
             wifiKey,
-            username,
-            easylinkVersion,
-            activateTimeout,
-            activatePort,
+            uid,
+            appid,
+            productKey,
+            token,
             moduleDefaultUser,
             moduleDefaultPass
         ]);
