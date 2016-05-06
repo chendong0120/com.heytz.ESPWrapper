@@ -1,4 +1,4 @@
-package com.heytz.ESPWrapper.esptouch.task;
+package com.espressif.iot.esptouch.task;
 
 public class EsptouchTaskParameter implements IEsptouchTaskParameter {
 

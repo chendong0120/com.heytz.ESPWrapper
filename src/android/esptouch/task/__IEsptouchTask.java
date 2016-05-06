@@ -1,9 +1,9 @@
-package com.heytz.ESPWrapper.esptouch.task;
-
-import com.heytz.ESPWrapper.esptouch.IEsptouchListener;
-import com.heytz.ESPWrapper.esptouch.IEsptouchResult;
+package com.espressif.iot.esptouch.task;
 
 import java.util.List;
+
+import com.espressif.iot.esptouch.IEsptouchListener;
+import com.espressif.iot.esptouch.IEsptouchResult;
 
 /**
  * IEsptouchTask defined the task of esptouch should offer. INTERVAL here means

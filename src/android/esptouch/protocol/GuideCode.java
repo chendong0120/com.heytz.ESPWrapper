@@ -1,7 +1,7 @@
-package com.heytz.ESPWrapper.esptouch.protocol;
+package com.espressif.iot.esptouch.protocol;
 
-import com.heytz.ESPWrapper.esptouch.task.ICodeData;
-import com.heytz.ESPWrapper.esptouch.util.ByteUtil;
+import com.espressif.iot.esptouch.task.ICodeData;
+import com.espressif.iot.esptouch.util.ByteUtil;
 
 public class GuideCode implements ICodeData {
 

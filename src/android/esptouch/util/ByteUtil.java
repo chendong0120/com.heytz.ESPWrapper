@@ -1,4 +1,4 @@
-package com.heytz.ESPWrapper.esptouch.util;
+package com.espressif.iot.esptouch.util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Random;

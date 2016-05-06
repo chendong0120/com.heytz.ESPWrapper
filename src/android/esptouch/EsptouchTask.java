@@ -1,11 +1,12 @@
-package com.heytz.ESPWrapper.esptouch;
-
-import android.content.Context;
-import com.heytz.ESPWrapper.esptouch.task.EsptouchTaskParameter;
-import com.heytz.ESPWrapper.esptouch.task.IEsptouchTaskParameter;
-import com.heytz.ESPWrapper.esptouch.task.__EsptouchTask;
+package com.espressif.iot.esptouch;
 
 import java.util.List;
+
+import android.content.Context;
+
+import com.espressif.iot.esptouch.task.EsptouchTaskParameter;
+import com.espressif.iot.esptouch.task.IEsptouchTaskParameter;
+import com.espressif.iot.esptouch.task.__EsptouchTask;
 
 public class EsptouchTask implements IEsptouchTask {
 
