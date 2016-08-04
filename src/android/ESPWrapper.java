@@ -82,16 +82,17 @@ public class ESPWrapper extends CordovaPlugin {
 
                 if (result.isSuc()) {
                     try {
-
                         JSONObject deviceInfo = new JSONObject();
                         deviceInfo.put("mac", result.getBssid());
                         deviceInfo.put("ip", result.getInetAddress());
                         easyLinkCallbackContext.success(deviceInfo);
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        easyLinkCallbackContext.error(e.getMessage());
                     }
+                } else {
+                    easyLinkCallbackContext.error("fail");
                 }
-                //                List<IEsptouchResult> result = mEsptouchTask.executeForResults(taskResultCountStr);
+
             }
         }).start();
     }
