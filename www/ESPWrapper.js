@@ -21,13 +21,6 @@ exports.setDeviceWifi = function (wifiSSID,
             moduleDefaultPass
         ]);
 };
-exports.sendDidVerification = function (did,
-                                        success, error) {
-    exec(success, error, "ESPWrapper", "sendDidVerification",
-        [
-            did
-        ]);
-};
 exports.dealloc = function () {
     exec( null,null,"ESPWrapper", "dealloc",
         []);
